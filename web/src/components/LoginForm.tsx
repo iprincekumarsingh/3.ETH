@@ -35,34 +35,48 @@ export const LoginForm: React.FC<LoginFormProps> = ({ setAuthToken, authToken })
   };
 
   return (
-    <div className="flex h-screen flex-col items-center justify-center w-full m lg:py-12">
-    <div className="text-center">
-      <h2 className="text-4xl font-bold text-gray-900">Welcome to BetaX</h2>
-      <p className="mt-3 text-sm text-gray-600">Join us on our journey to migrate from Web2 to Web3!</p>
-    </div>
+    <div className="relative flex h-screen flex-col items-center justify-center w-full bg-gradient-to-b from-gray-900 to-black">
+      {/* Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#232323_1px,transparent_1px),linear-gradient(to_bottom,#232323_1px,transparent_1px)] bg-[size:0.75rem_0.75rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
 
-    <div className="mt-10 px-6 py-8  w-full max-w-md mx-auto">
-      {!authToken ? (
-        <div className="flex flex-col items-center space-y-2 rounded-lg border  shadow-sm p-2 bg-white/50 backdrop-blur-sm hover:shadow-md transition-all duration-300">
-          <div className="w-full">
-            <GoogleLogin
-              onSuccess={handleGoogleLogin}
-              onError={() => console.error("Login Failed")}
-            />
-          </div>
+      <div className="relative w-full max-w-md p-8 bg-gray-800/90 rounded-2xl shadow-2xl backdrop-blur-lg border border-gray-700">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-white bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">Welcome to BetaX Chat</h2>
+          <p className="mt-3 text-sm text-gray-400">Connect and chat seamlessly across Web2 and Web3</p>
         </div>
-      ) : (
-        <div className="flex flex-col items-center space-y-4">
-          <p className="text-green-600">Successfully logged in!</p>
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
-          >
-            Logout
-          </button>
+
+        <div className="mt-8 w-full">
+          {!authToken ? (
+            <div className="space-y-6">
+              <div className="p-6 bg-gradient-to-br from-gray-700/90 to-gray-800/90 rounded-xl border border-gray-600/50 shadow-lg hover:shadow-xl transition-all duration-300 hover:border-gray-500/50">
+                <p className="text-lg text-gray-200 mb-4 font-medium">Ready to start your journey?</p>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 blur-lg"></div>
+                  <GoogleLogin
+                    auto_select={false}
+                    use_fedcm_for_prompt={false}
+                    containerProps={{
+                      className: "w-[100%] flex justify-center items-center relative z-10"
+                    }}
+                    onSuccess={handleGoogleLogin}
+                    onError={() => console.error("Login Failed")}
+                  />
+                </div>
+              </div>
+              <div className="text-center">
+                <p className="text-sm text-gray-400 hover:text-gray-300 transition-colors duration-200">
+                  By signing in, you agree to our{" "}
+                  <a href="#" className="text-blue-400 hover:text-blue-300 underline decoration-dotted">
+                    Terms of Service
+                  </a>
+                </p>
+              </div>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
-      )}
+      </div>
     </div>
-  </div>
   );
 };

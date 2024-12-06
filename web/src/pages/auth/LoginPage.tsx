@@ -8,17 +8,11 @@ interface LoginPageProps {
 
 export const LoginPage: React.FC<LoginPageProps> = ({ setAuthToken, authToken }) => {
   return (
-    <main className="h-screen flex  justify-center items-center">
+    <main className="h-screen w-full flex  justify-center items-center">
+
+      <LoginForm setAuthToken={setAuthToken} authToken={authToken} />
 
 
-      <div className="w-1/2  h-full flex justify-center items-center">
-
-      </div>
-
-      <div className="w-1/2 h-full flex justify-center items-center">
-
-        <LoginForm setAuthToken={setAuthToken} authToken={authToken} />
-      </div>
     </main>
   );
 };
