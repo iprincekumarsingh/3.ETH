@@ -4,11 +4,13 @@ import { BuildType, OktoProvider } from 'okto-sdk-react';
 import { LoginPage } from './pages/auth/LoginPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { DashboardLayout } from './layouts/DashboardLayout';
-import DashboardPage from './pages/dashboard/DashboardPage';
+import DashboardPage from './pages/dashboard/AoonAdhar';
 import DeployedContracts from './pages/DeployedContracts';
 import Templates from './pages/Templates';
 import { AnonAadhaarProvider } from "@anon-aadhaar/react";
 import Home from './pages/home/Home';
+import Group from './pages/home/Group';
+import Setting from './pages/Setting/Setting';
 
 const OKTO_CLIENT_API_KEY = 'f4293e16-64a7-4395-abaf-1fc98ee3c658';
 const APP_ID = 1074160606479048704; // App ID from https://anon-aadhaar-documentation.vercel.app/
@@ -102,6 +104,8 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
         }
       >
         <Route index element={<Home />} />
+        <Route path="group" element={<Group />} />
+        <Route path="setting" element={<Setting />} />
       </Route>
 
     </Routes>
