@@ -17,12 +17,7 @@ function DashboardPage() {
     }
   }, [anonAadhaar?.status, navigate]);
 
-    setTimeout(() => {
-      googleLogout();
-      window.location.href = "/";
-      localStorage.clear();
-    }, 2000);
-  };
+  
 
   return (
     <div className="relative flex h-screen flex-col items-center justify-center w-full bg-black">
@@ -38,7 +33,7 @@ function DashboardPage() {
         <div className="flex-1 pl-8 justify-center mt-20">
           <div className="space-y-8">
             <div className="p-10 transition-all duration-300">
-             
+
 
               <h1 className="text-7xl text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-purple-500 font-extrabold tracking-tight h-32">
                 Verify Identity
@@ -47,11 +42,11 @@ function DashboardPage() {
                 Complete anonymous Aadhaar verification to continue
               </p>
 
-              <div className="relative w-[200px] justify-center items-center" style={{opacity: anonAadhaar?.status === "logged-in" ? 0.5 : 1}}>
-                <LogInWithAnonAadhaar 
+              <div className="relative w-[200px] justify-center items-center" style={{ opacity: anonAadhaar?.status === "logged-in" ? 0.5 : 1 }}>
+                <LogInWithAnonAadhaar
                   nullifierSeed={1234}
                   fieldsToReveal={["revealAgeAbove18", "revealGender", "revealState", "revealState"]}
-                 
+
                 />
               </div>
 
