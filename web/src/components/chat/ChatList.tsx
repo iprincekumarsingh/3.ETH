@@ -1,12 +1,15 @@
 import React from 'react';
 
 interface ChatListItemProps {
+  id: string;
   title?: string;
   name: string;
   avatar: string;
   lastMessage?: string;
   timestamp?: string;
   unreadCount?: number;
+  onClick?: () => void;
+  isSelected?: boolean;
 }
 
 const ChatListItem: React.FC<ChatListItemProps> = ({
@@ -15,10 +18,15 @@ const ChatListItem: React.FC<ChatListItemProps> = ({
   avatar,
   lastMessage,
   timestamp,
-
+  onClick,
+  isSelected,
 }) => {
   return (
-    <div className="flex items-center p-3 hover:bg-gray-800/50 rounded-lg cursor-pointer transition-colors duration-200">
+    <div 
+      className={`flex items-center p-3 hover:bg-gray-800/50 rounded-lg cursor-pointer transition-colors duration-200 
+        ${isSelected ? 'bg-gray-800/50' : ''}`}
+      onClick={onClick}
+    >
       <div className="relative flex-shrink-0">
         <img 
           src={avatar} 
@@ -46,9 +54,17 @@ interface ChatListProps {
   chats: ChatListItemProps[];
   title?: string;
   titleClassName?: string;
+  onChatSelect?: (chat: ChatListItemProps) => void;
+  selectedChatId?: string;
 }
 
-function ChatList({ chats, title = "Chats", titleClassName = "text-xl font-bold text-white" }: ChatListProps) {
+function ChatList({ 
+  chats, 
+  title = "Chats", 
+  titleClassName = "text-xl font-bold text-white",
+  onChatSelect,
+  selectedChatId 
+}: ChatListProps) {
   return (
     <aside className="w-80 h-screen border-r border-gray-800/50 bg-black/90 backdrop-blur-xl overflow-y-auto">
       <div className="p-3 border-b border-gray-800/50">
@@ -56,7 +72,12 @@ function ChatList({ chats, title = "Chats", titleClassName = "text-xl font-bold 
       </div>
       <div className="space-y-1 p-2">
         {chats.map((chat, index) => (
-          <ChatListItem key={index} {...chat} />
+          <ChatListItem 
+            key={index} 
+            {...chat} 
+            onClick={() => onChatSelect?.(chat)}
+            isSelected={selectedChatId === chat.id}
+          />
         ))}
       </div>
     </aside>

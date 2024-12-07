@@ -1,14 +1,26 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import ChatList from '../../components/chat/ChatList';
 import ChatScreen from '../chat/ChatScreen';
 
+interface Chat {
+  id: string;
+  name: string;
+  avatar: string;
+  lastMessage?: string;
+  timestamp?: string;
+  unreadCount?: number;
+}
+
 export default function Home() {
+  const [selectedChat, setSelectedChat] = useState<Chat | null>(null);
+
   useEffect(() => {
     document.title = 'Home | Chat';
   }, []);
 
   const chats = useMemo(() => [
     {
+      id: '1',
       name: 'John Doe',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=john',
       lastMessage: 'Hello, how are you?',
@@ -16,6 +28,7 @@ export default function Home() {
       unreadCount: 2
     },
     {
+      id: '2',
       name: 'Alice Smith',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=alice', 
       lastMessage: 'The meeting is scheduled for tomorrow',
@@ -23,6 +36,7 @@ export default function Home() {
       unreadCount: 1
     },
     {
+      id: '3',
       name: 'Bob Wilson',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=bob',
       lastMessage: 'Thanks for your help!',
@@ -30,6 +44,7 @@ export default function Home() {
       unreadCount: 0
     },
     {
+      id: '4',
       name: 'Emma Davis',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=emma',
       lastMessage: 'Can we discuss the project?',
@@ -37,6 +52,7 @@ export default function Home() {
       unreadCount: 3
     },
     {
+      id: '5',
       name: 'Michael Brown',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=michael',
       lastMessage: 'The documents are ready',
@@ -44,6 +60,7 @@ export default function Home() {
       unreadCount: 0
     },
     {
+      id: '6',
       name: 'Sarah Johnson',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=sarah',
       lastMessage: 'Looking forward to our call',
@@ -51,6 +68,7 @@ export default function Home() {
       unreadCount: 1
     },
     {
+      id: '7',
       name: 'David Lee',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=david',
       lastMessage: 'Please review the changes',
@@ -58,6 +76,7 @@ export default function Home() {
       unreadCount: 0
     },
     {
+      id: '8',
       name: 'Lisa Anderson',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lisa',
       lastMessage: 'Great work on the presentation!',
@@ -65,6 +84,7 @@ export default function Home() {
       unreadCount: 0
     },
     {
+      id: '9',
       name: 'James Wilson',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=james',
       lastMessage: 'When is the next meeting?',
@@ -72,6 +92,7 @@ export default function Home() {
       unreadCount: 2
     },
     {
+      id: '10',
       name: 'Emily Taylor',
       avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=emily',
       lastMessage: "I've sent you the files",
@@ -80,13 +101,19 @@ export default function Home() {
     }
   ], []);
 
+  const handleChatSelect = (chat: Chat) => {
+    setSelectedChat(chat);
+  };
+
   return (
     <div className="flex w-full">
       <ChatList
         chats={chats}
         title="Chats"
+        onChatSelect={handleChatSelect}
+        selectedChatId={selectedChat?.id}
       />
-      <ChatScreen />
+      <ChatScreen selectedChat={selectedChat} />
     </div>
   );
 }

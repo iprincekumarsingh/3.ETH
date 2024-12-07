@@ -26,6 +26,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const handleLogout = () => {
     console.log("setting auth token to null");
     setAuthToken(null);
+    localStorage.clear()
   };
 
   return (

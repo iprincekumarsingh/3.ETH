@@ -9,7 +9,16 @@ interface Message {
   avatar?: string;
 }
 
-function ChatScreen() {
+interface ChatScreenProps {
+  selectedChat: {
+    id: string;
+    name: string;
+    avatar: string;
+  } | null;
+  emptyStateTitle?: string;
+}
+
+function ChatScreen({ selectedChat, emptyStateTitle = "Select a chat to start messaging" }: ChatScreenProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -52,15 +61,42 @@ function ChatScreen() {
     }, 1000);
   };
 
+  if (!selectedChat) {
+    return (
+      <div className="flex flex-col w-full bg-gray-900 h-screen items-center justify-center text-gray-400">
+        <Bot className="w-16 h-16 mb-4" />
+        <p className="text-xl">{emptyStateTitle}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col w-full bg-gray-900 h-screen">
       {/* Chat Header */}
       <div className="p-4 border-b border-gray-800 bg-black/90 backdrop-blur-xl">
-        <div className="flex items-center gap-3">
-          <Bot className="w-8 h-8 text-purple-500" />
-          <div>
-            <h2 className="text-xl font-bold text-white">Intitate New CHAT</h2>
-            {/* <p className="text-sm text-gray-400">Always here to help</p> */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <img 
+              src={selectedChat.avatar} 
+              alt={`${selectedChat.name}'s avatar`}
+              className="w-8 h-8 rounded-full"
+            />
+            <div>
+              <h2 className="text-xl font-bold text-white">{selectedChat.name}</h2>
+              <p className="text-sm text-gray-400">Online</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <button 
+              className="p-2 text-gray-400 hover:text-white rounded-lg hover:bg-gray-800/50 transition-colors duration-200"
+              title="Start video call"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M23 7l-7 5 7 5V7z"/>
+                <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+              </svg>
+            </button>
           </div>
         </div>
       </div>

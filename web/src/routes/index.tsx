@@ -7,6 +7,7 @@ import { DashboardLayout } from '../layouts/DashboardLayout';
 import Home from '../pages/home/Home';
 import Group from '../pages/home/Group';
 import Setting from '../pages/Setting/Setting';
+import Explore from '../pages/Search/Explore';
 
 const OKTO_CLIENT_API_KEY = 'd6994eeb-3acb-4940-80ae-6c5534100908';
 export const AppRoutes: React.FC = () => {
@@ -21,6 +22,7 @@ export const AppRoutes: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/group" element={<Group />} />
             <Route path="/setting" element={<Setting />} />
+            <Route path="/explore" element={<Explore />} />
           </Route>
         </Routes>
       </OktoProvider>

@@ -16,7 +16,7 @@ export const DashboardLayout: React.FC = () => {
     <div className="h-screen bg-gray-900x">
       <div className="flex h-full">
         <Sidebar />
-        <main className="flex-1 bg-gray-900">
+        <main className="flex-1 ">
           <Outlet />
         </main>
       </div>
@@ -36,7 +36,7 @@ export const DashboardLayout: React.FC = () => {
               ))}
             </div>
           )}
-          {/* <button 
+          <button 
             className="group relative flex items-center justify-center gap-3"
             onClick={() => setIsToolbarOpen(!isToolbarOpen)}
           >
@@ -46,7 +46,7 @@ export const DashboardLayout: React.FC = () => {
             <div className="flex items-center">
               <BadgePlus className={`w-16 h-16 p-4 text-white bg-gradient-to-br from-purple-600 to-blue-600 rounded-full shadow-lg shadow-purple-500/20 hover:scale-110 transition-all duration-300 ${isToolbarOpen ? 'rotate-45' : ''}`} />
             </div>
-          </button> */}
+          </button>
         </div>
       </div>
     </div>

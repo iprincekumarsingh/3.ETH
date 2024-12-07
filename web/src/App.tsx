@@ -11,6 +11,7 @@ import { AnonAadhaarProvider } from "@anon-aadhaar/react";
 import Home from './pages/home/Home';
 import Group from './pages/home/Group';
 import Setting from './pages/Setting/Setting';
+import Explore from './pages/Search/Explore';
 
 const OKTO_CLIENT_API_KEY = 'f4293e16-64a7-4395-abaf-1fc98ee3c658';
 const APP_ID = 1074160606479048704; // App ID from https://anon-aadhaar-documentation.vercel.app/
@@ -106,6 +107,7 @@ const AppRoutes: React.FC<AppRoutesProps> = () => {
         <Route index element={<Home />} />
         <Route path="group" element={<Group />} />
         <Route path="setting" element={<Setting />} />
+        <Route path="explore" element={<Explore />} />
       </Route>
 
     </Routes>

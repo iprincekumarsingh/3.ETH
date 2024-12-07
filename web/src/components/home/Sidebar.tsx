@@ -1,20 +1,25 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { Settings, LogOut, Menu, X, Home, MessageCircle, PanelLeftClose, PanelLeftOpen, GroupIcon, UsersRound } from 'lucide-react';
+import { Settings, LogOut, Menu, X, Home, MessageCircle, PanelLeftClose, PanelLeftOpen, GroupIcon, UsersRound, User, Search } from 'lucide-react';
 import { cn } from '../../libs/utils';
+import { useAuth } from '../../context/AuthContext';
+import toast from 'react-hot-toast';
 
 export const Sidebar: React.FC = () => {
     const [isOpen, setIsOpen] = useState(window.innerWidth >= 1024);
     const location = useLocation();
+    const { handleLogout } = useAuth()
 
     const navItems = [
-        { icon: Home, label: 'Chat Bot', to: '/home' },
-        { icon: MessageCircle, label: 'Templates Contracts', to: '/dashboard/contracts-templates' },
+        { icon: Home, label: 'Home', to: '/home' }, // Changed label from 'Chat Bot' to 'Home' to be more standard/clear
+        { icon: Search, label: 'Explore', to: '/home/explore' },
         { icon: UsersRound, label: 'Group', to: '/home/group' },
-        { icon: Settings, label: 'Settings', to: '/home/setting' },
+        { icon: Settings, label: 'Settings', to: '/home/setting' }
     ];
 
-    const toggleSidebar = () => setIsOpen(!isOpen);
+
+
+
 
     return (
         <>
@@ -61,8 +66,29 @@ export const Sidebar: React.FC = () => {
                     })}
                 </nav>
 
-                <div className="p-2 border-t border-gray-800/50">
+                <div className="p-2 border-t flex-re border-gray-800/50">
+
                     <button className="group relative w-full p-3 text-gray-400 hover:text-white rounded-xl hover:bg-red-500/10 transition-all duration-300 flex justify-center hover:scale-110">
+                        <User className="h-6 w-6" />
+
+                        {/* Tooltip */}
+                        <span className="absolute left-full ml-4 px-3 py-2 bg-gray-800/90 backdrop-blur-sm text-white text-sm rounded-lg
+                                opacity-0 group-hover:opacity-100 invisible group-hover:visible
+                                transition-all duration-300 whitespace-nowrap shadow-lg shadow-black/50
+                                border border-gray-700/50 z-50">
+                            Logout
+                        </span>
+                    </button>
+                    <button onClick={() => {
+                        toast('Logging out....', {
+                            position: 'top-right',
+                            icon: 'progress',
+                          
+                        })
+                        setTimeout(() => {
+                            handleLogout()
+                        }, 1500)
+                    }} className="group relative w-full p-3 text-gray-400 hover:text-white rounded-xl hover:bg-red-500/10 transition-all duration-300 flex justify-center hover:scale-110">
                         <LogOut className="h-6 w-6" />
 
                         {/* Tooltip */}
